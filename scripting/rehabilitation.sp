@@ -12,7 +12,7 @@ public Plugin myinfo =
 	name = "[MelonCartel] Rehabilitation",
 	author = "B3none, Venom",
 	description = "A simple chat command to let admins respawn a player in Counter Strike.",
-	version = "1.0.1",
+	version = "1.0.2",
 	url = "https://github.com/b3none"
 }
 
@@ -34,13 +34,17 @@ public Action RespawnTarget(int client, int args)
 	int foundTargets[MAXPLAYERS + 1];
 	bool uselessShit;
 	char targetName[64];
+	int foundTargetsCount = 0;
 	
-	ProcessTargetString(queryString, client, foundTargets, MAXPLAYERS + 1, COMMAND_FILTER_CONNECTED, targetName, sizeof(targetName), uselessShit);
+	foundTargetsCount = ProcessTargetString(queryString, client, foundTargets, MAXPLAYERS + 1, COMMAND_FILTER_CONNECTED, targetName, sizeof(targetName), uselessShit);
 	
-	if (foundTargets[1]) {
+	if (foundTargetsCount > 1) {
 		PrintToChat(client, "%s Multiple targets found!", MESSAGE_PREFIX);
 		return;
-	} 
+	} else if (foundTargetsCount == 0) {
+		PrintToChat(client, "%s Nobody found!", MESSAGE_PREFIX);
+		return;
+	}
 	
 	for (int target = 0; target <= sizeof(foundTargets); target++) {
 		if (IsValidClient(foundTargets[target])) {
