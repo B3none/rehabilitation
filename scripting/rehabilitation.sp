@@ -12,7 +12,7 @@ public Plugin myinfo =
 	name = "[MelonCartel] Rehabilitation",
 	author = "B3none, Venom",
 	description = "A simple chat command to let admins respawn a player in Counter Strike.",
-	version = "1.0.0",
+	version = "1.0.1",
 	url = "https://github.com/b3none"
 }
 
