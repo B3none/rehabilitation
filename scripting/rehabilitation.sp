@@ -39,16 +39,16 @@ public Action RespawnTarget(int client, int args)
 	
 	if (foundTargets[1]) {
 		PrintToChat(client, "%s Multiple targets found!", MESSAGE_PREFIX);
-		
 		return;
 	} 
 	
 	for (int target = 0; target <= sizeof(foundTargets); target++) {
-		if (IsValidClient(target)) {
-			if (!IsPlayerAlive(target)) {
+		if (IsValidClient(foundTargets[target])) {
+			if (!IsPlayerAlive(foundTargets[target])) {
 				PrintToChatAll("%s %N has just respawned %s", MESSAGE_PREFIX, client, targetName);
 				
-				Respawn(target);
+				Respawn(foundTargets[target]);
+				return;
 			}
 			
 			PrintToChat(client, "%s The target is already alive.", MESSAGE_PREFIX);
